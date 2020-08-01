@@ -1,0 +1,79 @@
+#timeNow {
+    color: blue;
+    margin-top: 50px;
+}
+.title-small {
+    font-family: MontserratExtraBold;
+    font-size: 32px;
+    color: #202020;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 1.2;
+}
+.margin-top-40 {
+    margin-top: 40px;
+}
+.margin-top-15 {
+    margin-top: 50px !important;
+}
+.row::before {
+    display: table;
+    content: " ";
+}
+img {
+    width: 209px;
+    height: 140px;
+}
+.zoom-5 {
+    zoom: 0.5;
+    width: auto !important;
+    height: auto !important;
+    margin-bottom: 40px;
+}
+.item-menu {
+    margin-bottom: 3rem;
+}
+.name {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+.order {
+    display: flex;
+    justify-content: center;
+}
+th {
+    background-color:teal;
+    color:white;
+    text-align: center;
+    padding: 10px;
+}
+td:first-child{
+    padding: 5px 20px 5px 5px;
+    background-color: #134f5c;
+    color:#ffffff;
+    text-align: left;
+}
+td:nth-child(2){
+    padding: 5px;
+    min-width: 100px;
+    text-align: center;
+}
+td:nth-child(3){
+    padding: 5px;
+    text-align: right;
+    min-width: 100px;
+}
+tfoot td:not(:first-child) {
+    background-color: tomato;
+    color: white;
+}
+textarea {
+    margin-left: 20px;
+    width: 100%;
+    max-width: 600px;
+}
+.loading {
+    padding: 50%;
+    font-size: 50px;
+}

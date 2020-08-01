@@ -1,0 +1,25 @@
+{
+  "name": "orderrice",
+  "version": "1.0.0",
+  "description": "order rice from anzi",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/namintelvn/OrderRice.git"
+  },
+  "author": "namintelvn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/namintelvn/OrderRice/issues"
+  },
+  "homepage": "https://github.com/namintelvn/OrderRice#readme",
+  "dependencies": {
+    "ejs": "^3.1.3",
+    "express": "^4.17.1",
+    "request": "^2.88.2",
+    "socket.io": "^2.3.0"
+  }
+}
