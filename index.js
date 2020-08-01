@@ -9,7 +9,6 @@ var io = require("socket.io")(server);
 server.listen(process.env.PORT || 3000);
 
 const request = require('request');
-const { env } = require("process");
 
 var currentDate = new Date().getDate();
 var orderUsers=[];
