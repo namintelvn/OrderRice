@@ -49,9 +49,20 @@ io.on("connection", function(socket){
   socket.on("client-order", function(data){
     var name = data.name;
     if(!orderItems[name]) {
-      orderItems[name] = 0
+      orderItems[name] = {
+        orderUser: {},
+        quantity: 0
+      }
+
     }
-    orderItems[name] = orderItems[name] + data.flag
+    if(socket.orderUser && data.flag != 0) {
+      if(data.flag == 1) {
+        orderItems[name].orderUser[socket.orderUser] = true;
+      } else if (data.flag == -1) {
+        orderItems[name].orderUser[socket.orderUser] = false;
+      }
+    }
+    orderItems[name].quantity = orderItems[name].quantity + data.flag;
 
     // get log
     var and = '';

@@ -45,13 +45,20 @@ socket.on("server-getlistfood", function(data){
 socket.on("server-getlistorder", function(data){
   var listOrder = data.orderItems;
   var count = 0;
+  var listCurrentUserOrder = [];
   $('#order tbody').html('');
   for (const key in listOrder) {
     if (listOrder.hasOwnProperty(key)) {
-      const quantity = listOrder[key];
+      const quantity = listOrder[key].quantity;
       count+= quantity
-      $('#order tbody').append(`<tr><td>${key}</td><td>${quantity}</td><td>${itemPrice.toLocaleString()} đ</td></tr>`)
+      $('#order tbody').append(`<tr><td>${key}</td><td>${quantity}</td><td>${itemPrice.toLocaleString()} đ</td></tr>`);
+      if(listOrder[key].orderUser[localStorage.getItem('name')]) {
+        listCurrentUserOrder.push(key);
+      }
     }
+  }
+  for (const item of listCurrentUserOrder) {
+    $(`.btn-order[name="${item}"]`).text('Cancel').removeClass('btn-primary').addClass('btn-danger');
   }
   $('#orderCount').text(count);
   $('#orderMoney').text((count * itemPrice).toLocaleString() + ' đ');
