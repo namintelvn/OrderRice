@@ -44,8 +44,8 @@ io.on("connection", function(socket){
           socket.emit("error", err);
           return;
         }
-        var html = body.match(/(?<=<body>)([\s\S]+)(?=<\/body>)/g);
-        socket.emit("server-getlistfood", html);
+        // var html = body.match(/(?<=<body>)([\s\S]+)(?=<\/body>)/g);
+        socket.emit("server-getlistfood", body);
       }
     )
   });
