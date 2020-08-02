@@ -74,7 +74,7 @@ textarea {
     max-width: 600px;
 }
 .loading {
-    padding: 50%;
+    padding-top: 50%;
     font-size: 50px;
 }
 .container {
