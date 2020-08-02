@@ -38,14 +38,14 @@ io.on("connection", function(socket){
 
   socket.on("client-getlistfood", function(data){
     request.post('https://www.anzi.com.vn/home/getListMenu', 
-      {form: {date: '2020-08-01', 'string': 'Thứ bảy'}}, 
+      // {form: {date: '2020-08-01', 'string': 'Thứ bảy'}}, 
       function(err, res, body) {
         if(err) {
           socket.emit("error", err);
           return;
         }
-        // var html = body.match(/(?<=<body>)([\s\S]+)(?=<\/body>)/g);
-        socket.emit("server-getlistfood", body);
+        var html = body.match(/(?<=<body>)([\s\S]+)(?=<\/body>)/g);
+        socket.emit("server-getlistfood", html);
       }
     )
   });
