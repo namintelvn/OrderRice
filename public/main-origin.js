@@ -1,4 +1,4 @@
-var socket = io("http://localhost:3000");
+var socket = io(window.location.href);
 var registerDialog;
 var itemPrice = 32000;
 var countRegister = 0;
@@ -65,6 +65,11 @@ socket.on("server-getlistorder", function(data){
   if(data.log !== '') {
     $('textarea').text($('textarea').text() + '\n' + data.log);
   }
+});
+
+socket.on("error", function(error){
+  console.log(error);
+  $('textarea').text($('textarea').text() + '\n' + JSON.stringify(error));
 });
 
 $(document).ready(function(){
