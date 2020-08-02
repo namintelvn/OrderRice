@@ -36,9 +36,8 @@ io.on("connection", function(socket){
     }
   });
 
-  socket.on("client-getlistfood", function(data){
-    request.post('https://www.anzi.com.vn/home/getListMenu', 
-      // {form: {date: '2020-08-01', 'string': 'Thứ bảy'}}, 
+  socket.on("client-getlistfood", function(){
+    request.get('https://www.anzi.com.vn/home/getListMenu',
       function(err, res, body) {
         if(err) {
           socket.emit("error", err);
