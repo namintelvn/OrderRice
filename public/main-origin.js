@@ -47,12 +47,22 @@ socket.on("server-getlistorder", function(data){
   var count = 0;
   var listCurrentUserOrder = [];
   $('#order tbody').html('');
+
+  var currentUser = localStorage.getItem('name');
   for (const key in listOrder) {
     if (listOrder.hasOwnProperty(key)) {
       const quantity = listOrder[key].quantity;
+      const orderUser = listOrder[key].orderUser;
       count+= quantity
-      $('#order tbody').append(`<tr><td>${key}</td><td>${quantity}</td><td>${itemPrice.toLocaleString()} đ</td></tr>`);
-      if(listOrder[key].orderUser[localStorage.getItem('name')]) {
+      $('#order tbody').append(`
+        <tr>
+          <td>${key}</td>
+          <td>${quantity}</td>
+          <td>${itemPrice.toLocaleString()} đ</td>
+          <td>${Object.keys(orderUser).filter(item => (orderUser[item] == true))}</td>
+        </tr>
+      `);
+      if(orderUser[currentUser]) {
         listCurrentUserOrder.push(key);
       }
     }
@@ -69,7 +79,6 @@ socket.on("server-getlistorder", function(data){
 
 socket.on("error", function(error){
   console.log(error);
-  $('textarea').text($('textarea').text() + '\n' + JSON.stringify(error));
 });
 
 $(document).ready(function(){
@@ -128,6 +137,6 @@ $(document).ready(function(){
     if(!$('#register_name').val()) {
       return;
     }
-    socket.emit("client-register", {targetName: $("#register_name").val(), flag: 1});
+    socket.emit("client-register", {targetName: escape($("#register_name").val()), flag: 1});
   }
 });

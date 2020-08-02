@@ -48,30 +48,33 @@ th {
     text-align: center;
     padding: 10px;
 }
-td:first-child{
+td {
+    min-width: 100px;
+}
+tbody td:first-child{
     padding: 5px 20px 5px 5px;
     background-color: #134f5c;
     color:#ffffff;
     text-align: left;
+    min-width: 200px;
 }
-td:nth-child(2){
+tbody td:nth-child(2){
     padding: 5px;
-    min-width: 100px;
     text-align: center;
 }
-td:nth-child(3){
+tbody td:nth-child(3){
     padding: 5px;
     text-align: right;
-    min-width: 100px;
 }
-tfoot td:not(:first-child) {
-    background-color: tomato;
+tbody td:nth-child(4){
+    padding: 5px;
+    text-align: left;
+    min-width: 400px;
+}
+tfoot td {
+    padding: 5px;
+    background-color: brown;
     color: white;
-}
-textarea {
-    margin-left: 20px;
-    width: 100%;
-    max-width: 600px;
 }
 .loading {
     padding-top: 40%;
