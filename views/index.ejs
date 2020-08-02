@@ -1,23 +1,34 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Order Rice</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" type="text/css" href="layout.css" />
-    <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="main.js"></script>
-  </head>
-  <body>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Rice</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" type="text/css" href="layout.css" />
+  <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="main.js"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Anzi KPIS</a>
+      </div>
+    </div>
+  </nav>
   <div id="container" class="container text-center">
     <div id="content" class="col-xs-12">
       <div class="loading">Loading...</div>
     </div>
-    <div id="order" class="col-xs-12 order d-flex"  style="display: none;">
+    <div id="order" class="col-xs-12 order d-flex" style="display: none;">
       <table border="1">
         <thead>
           <tr>
@@ -40,8 +51,9 @@
 
   <div id="dialog-register" title="Register">
     <label id="register_label">Who are you?</label>
-    <input id="register_name"/>
+    <input id="register_name" />
   </div>
 
-  </body>
+</body>
+
 </html>

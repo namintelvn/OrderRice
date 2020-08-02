@@ -77,3 +77,6 @@ textarea {
     padding: 50%;
     font-size: 50px;
 }
+.container {
+    min-height: 360px;
+}
