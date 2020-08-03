@@ -6,40 +6,42 @@ app.set("views", "./views");
 
 var server = require("http").Server(app);
 var io = require("socket.io")(server);
-server.listen(process.env.PORT || 3000);
+server.listen(process.env.PORT || 3000, '192.168.1.25');
 
 const request = require('request');
 
-var currentDate = new Date().getDate();
-var orderUsers=[];
-var orderItems={};
+var currentDate = '';
+var orderUsers = [];
+var orderItems = {};
 
-io.on("connection", function(socket){
-  var newDate = new Date().getDate();
-  if(currentDate !== new Date().getDate()) {
+io.on("connection", function (socket) {
+  var newDate = new Date();
+  var newDateString = newDate.getFullYear() + '-' + (newDate.getMonth() + 1) + '-' + newDate.getDate();
+  if (currentDate !== newDateString) {
     orderItems = {};
-    currentDate = newDate;
+    currentDate = newDateString;
   }
-  
-  socket.on("client-register", function(data){
+
+  socket.on("client-register", function (data) {
     var orderName = data.targetName;
     var flag = data.flag;
-    
-    if(flag == 1 && orderUsers.indexOf(orderName)>=0){
+
+    if (flag == 1 && orderUsers.indexOf(orderName) >= 0) {
       socket.emit("server-register-failed");
-    }else{
+    } else {
       orderUsers.push(orderName);
       socket.orderUser = orderName;
-      if(flag == 1) {
+      if (flag == 1) {
         socket.emit("server-register-success", orderName);
       }
     }
   });
 
-  socket.on("client-getlistfood", function(){
-    request.get('https://www.anzi.com.vn/home/getListMenu',
-      function(err, res, body) {
-        if(err) {
+  socket.on("client-getlistfood", function () {
+    request.post('https://www.anzi.com.vn/home/getListMenu',
+      { form: { date: currentDate } },
+      function (err, res, body) {
+        if (err) {
           socket.emit("error", err);
           return;
         }
@@ -49,17 +51,17 @@ io.on("connection", function(socket){
     )
   });
 
-  socket.on("client-order", function(data){
+  socket.on("client-order", function (data) {
     var name = data.name;
-    if(!orderItems[name]) {
+    if (!orderItems[name]) {
       orderItems[name] = {
         orderUser: {},
         quantity: 0
       }
 
     }
-    if(socket.orderUser && data.flag != 0) {
-      if(data.flag == 1) {
+    if (socket.orderUser && data.flag != 0) {
+      if (data.flag == 1) {
         orderItems[name].orderUser[socket.orderUser] = true;
       } else if (data.flag == -1) {
         orderItems[name].orderUser[socket.orderUser] = false;
@@ -70,24 +72,24 @@ io.on("connection", function(socket){
     // get log
     var and = '';
     var log = '';
-    if(data.flag == 1) {
+    if (data.flag == 1) {
       and = ' order ';
-    } else if(data.flag == -1) {
+    } else if (data.flag == -1) {
       and = ' cancel order ';
     }
 
-    if(data.flag != 0) {
+    if (data.flag != 0) {
       log = socket.orderUser + and + data.name;
     }
 
-    io.sockets.emit("server-getlistorder", {orderItems, log});
+    io.sockets.emit("server-getlistorder", { orderItems, log });
   });
 
-  socket.on("client-getlistorder", function(data){
-    io.sockets.emit("server-getlistorder", {orderItems, log: ''});
+  socket.on("client-getlistorder", function (data) {
+    io.sockets.emit("server-getlistorder", { orderItems, log: '' });
   });
 });
 
-app.get("/", function(req, res){
+app.get("/", function (req, res) {
   res.render("index");
 });
