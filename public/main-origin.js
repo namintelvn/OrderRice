@@ -118,6 +118,10 @@ $(document).ready(function(){
         registerDialog.dialog('open')
       }
     });
+
+    $('#capture_order').click(function(){
+      getScreenshotOfElement();
+    })
   }
 
   function getListFood() {
@@ -138,5 +142,19 @@ $(document).ready(function(){
       return;
     }
     socket.emit("client-register", {targetName: escape($("#register_name").val()), flag: 1});
+  }
+
+  function getScreenshotOfElement() {
+    $('#order td:nth-child(4)').css('display','none');
+    html2canvas(document.querySelector("#order table")).then(canvas => {
+      canvas.toBlob(function(blob) { 
+        const item = new ClipboardItem({ "image/png": blob });
+        navigator.clipboard.write([item]);
+        $('#order td:nth-child(4)').css('display','');
+        setTimeout(() => {
+          alert('Ctrl-V to paste order list image.')
+        }, 100);
+      });
+    });
   }
 });

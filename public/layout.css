@@ -38,9 +38,13 @@ img {
     margin-bottom: 10px;
     font-size: 20px;
 }
+#capture_order {
+    margin-top: 30px;
+}
 .order {
     display: flex;
     justify-content: center;
+    margin-top: 20px;
 }
 th {
     background-color:teal;
