@@ -6,7 +6,7 @@ app.set("views", "./views");
 
 var server = require("http").Server(app);
 var io = require("socket.io")(server);
-server.listen(process.env.PORT || 3000, '192.168.1.25');
+server.listen(process.env.PORT || 3000);
 
 const request = require('request');
 
