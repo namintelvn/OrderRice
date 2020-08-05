@@ -1,5 +1,6 @@
 var socket = io(window.location.href);
 var registerDialog;
+var captureOrderDialog;
 var itemPrice = 32000;
 var countRegister = 0;
 
@@ -16,7 +17,10 @@ socket.on("server-register-success", function(data){
 socket.on("server-getlistfood", function(data){
   $('#content').html(data);
   $('img').each(function(index, value) {
-    $(value).attr('src', 'https://www.anzi.com.vn' + $(value).attr('src'));
+    var currentSrc = $(value).attr('src');
+    if(currentSrc != '') {
+      $(value).attr('src', 'https://www.anzi.com.vn' + $(value).attr('src'));
+    }
   })
   $('.des').remove();
   $('.update').remove();
@@ -88,8 +92,6 @@ $(document).ready(function(){
   socket.emit("client-getlistorder", '');
 
   function init() {
-    var dateNow = new Date();
-    $('#timeNow').html('THỰC ĐƠN (' + dateNow.getDate() + '/' + (dateNow.getMonth() + 1) + '/' + dateNow.getFullYear() + ')')
     registerDialog = $( "#dialog-register" ).dialog({
       autoOpen: false,
       buttons: {
@@ -117,6 +119,12 @@ $(document).ready(function(){
         }
         registerDialog.dialog('open')
       }
+    });
+
+    captureOrderDialog = $( "#dialog-capture-order" ).dialog({
+      autoOpen: false,
+      title: '* Press right mouse then choose "Copy Image"',
+      width: 'auto'
     });
 
     $('#capture_order').click(function(){
@@ -149,12 +157,24 @@ $(document).ready(function(){
     html2canvas(document.querySelector("#order table")).then(canvas => {
       canvas.toBlob(function(blob) { 
         const item = new ClipboardItem({ "image/png": blob });
-        navigator.clipboard.write([item]);
-        $('#order td:nth-child(4)').css('display','');
-        setTimeout(() => {
-          alert('Ctrl-V to paste order list image.')
-        }, 100);
+        try {
+          navigator.clipboard.write([item]);
+          $('#order td:nth-child(4)').css('display','');
+          setTimeout(() => {
+            alert('Ctrl-V to paste order list image.')
+          }, 100);
+        } catch (error) {
+          console.log(error);
+          openImagePopup(blob);
+        }
       });
     });
+  }
+
+  function openImagePopup(blob) {
+    var urlCreator = window.URL || window.webkitURL;
+    var imageUrl = urlCreator.createObjectURL(blob);
+    $('#img-capture-order').attr('src', imageUrl);
+    captureOrderDialog.dialog('open');
   }
 });
