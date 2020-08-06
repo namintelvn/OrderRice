@@ -30,6 +30,7 @@
       <div class="loading">Loading...</div>
     </div>
     <button id="capture_order" class="btn btn-primary">Capture Screenshot Order List</button>
+    <button id="random" class="btn btn-primary">Vòng Xoay May Mắn</button>
     <div id="order" class="col-xs-12 order d-flex" style="display: none;">
       <table border="1">
         <thead>
@@ -59,7 +60,17 @@
   <div id="dialog-capture-order" style="width: max-content;">
     <img id="img-capture-order" src="" style="width: auto; height: auto;"/>
   </div>
+  <div id="dialog-random">
+    <canvas id="canvas" width="434" height="434">
+      <p style="color: white" align="center">Sorry, your browser doesn't support canvas. Please try another.</p>
+    </canvas>
+  </div>
+  <div id="dialog-listUser">
+    
+  </div>
 
 </body>
-
+<script src="TweenMax.min.js"></script>
+<script src="winwheel.js"></script>
+<script src="random.js"></script>
 </html>

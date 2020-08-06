@@ -1,6 +1,8 @@
 var socket = io(window.location.href);
 var registerDialog;
 var captureOrderDialog;
+var listUserGameDialog;
+var wheelGameDialog;
 var itemPrice = 32000;
 var countRegister = 0;
 
@@ -83,6 +85,16 @@ socket.on("server-getlistorder", function(data){
 
 socket.on("error", function(error){
   console.log(error);
+});
+
+socket.on("server-getUsers", function(listUser){
+  var html = ''
+  listUser.map(item => {
+    html += `<input type="checkbox" name="${item}">
+              <label>${item}</label><br>`
+  });
+  $('#dialog-listUser').html(html);
+  listUserGameDialog.dialog('open')
 });
 
 $(document).ready(function(){
