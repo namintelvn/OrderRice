@@ -6,7 +6,7 @@ app.set("views", "./views");
 
 var server = require("http").Server(app);
 var io = require("socket.io")(server);
-server.listen(process.env.PORT || 3000, '192.168.0.34');
+server.listen(process.env.PORT || 3000, '192.168.1.25');
 
 const request = require('request');
 
@@ -29,7 +29,7 @@ io.on("connection", function (socket) {
     if (flag == 1 && orderUsers.indexOf(orderName) >= 0) {
       socket.emit("server-register-failed");
     } else {
-      if(orderUsers.indexOf(orderName) < 0) {
+      if (orderUsers.indexOf(orderName) < 0) {
         orderUsers.push(orderName);
       }
       socket.orderUser = orderName;
@@ -92,7 +92,7 @@ io.on("connection", function (socket) {
   });
 
   socket.on("client-getUsers", function () {
-    io.sockets.emit("server-getUsers", orderUsers);
+    sockets.emit("server-getUsers", orderUsers);
   });
 });
 
